@@ -55,7 +55,7 @@ void ev_slacImpl::run() {
 
     callbacks.log = [](const std::string& text) { EVLOG_info << "EvSlac: " << text; };
 
-    auto fsm_ctx = slac::fsm::ev::Context(callbacks);
+    auto fsm_ctx = slac::fsm::ev::Context(callbacks, slac_io.get_mac_addr());
     // fsm_ctx.slac_config.set_key_timeout_ms = config.set_key_timeout_ms;
     // fsm_ctx.slac_config.ac_mode_five_percent = config.ac_mode_five_percent;
     // fsm_ctx.slac_config.sounding_atten_adjustment = config.sounding_attenuation_adjustment;

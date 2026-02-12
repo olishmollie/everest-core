@@ -3,6 +3,8 @@
 #ifndef EV_SLAC_CONTEXT_HPP
 #define EV_SLAC_CONTEXT_HPP
 
+#include <cstdint>
+#include <cstring>
 #include <functional>
 #include <string>
 
@@ -54,10 +56,13 @@ struct ContextCallbacks {
 };
 
 struct Context {
-    explicit Context(const ContextCallbacks& callbacks_) : callbacks(callbacks_){};
+    static constexpr uint8_t BROADCAST_MAC[ETH_ALEN] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+    static constexpr uint8_t EV_PLC_MAC[ETH_ALEN] = {0x00, 0xB0, 0x52, 0x00, 0x00, 0x01};
 
-    // MAC address of our PLC modem (EV side)
-    uint8_t plc_mac[ETH_ALEN] = {0x00, 0xB0, 0x52, 0x00, 0x00, 0x01};
+    Context(const ContextCallbacks& callbacks_, const uint8_t* ev_host_mac) :
+        callbacks(callbacks_), ev_host_mac(ev_host_mac) {};
+
+    const uint8_t* ev_host_mac;
 
     // event specific payloads
     // FIXME (aw): due to the synchroneous nature of the fsm, this could be even a ptr/ref
