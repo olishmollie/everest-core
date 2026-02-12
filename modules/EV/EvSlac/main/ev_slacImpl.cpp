@@ -58,11 +58,7 @@ void ev_slacImpl::run() {
     callbacks.log_warn = [](const std::string& text) { EVLOG_warning << "EvSlac: " << text; };
     callbacks.log_error = [](const std::string& text) { EVLOG_error << "EvSlac: " << text; };
 
-    auto fsm_ctx = slac::fsm::ev::Context(callbacks);
-
-    // Copy correct MAC address
-    memcpy(fsm_ctx.plc_mac, slac_io.get_mac_addr(), sizeof(fsm_ctx.plc_mac));
-
+    auto fsm_ctx = slac::fsm::ev::Context(callbacks, slac_io.get_mac_addr());
     // fsm_ctx.slac_config.set_key_timeout_ms = config.set_key_timeout_ms;
     // fsm_ctx.slac_config.ac_mode_five_percent = config.ac_mode_five_percent;
     // fsm_ctx.slac_config.sounding_atten_adjustment = config.sounding_attenuation_adjustment;
