@@ -71,8 +71,8 @@ libcurl:
 
 # Josev
 Josev:
-  git: https://github.com/EVerest/ext-switchev-iso15118.git
-  git_tag: everest
+  git: https://github.com/olishmollie/ext-switchev-iso15118.git
+  git_tag: bugfix/bad-precharge-res
   cmake_condition: "EVEREST_ENABLE_PY_SUPPORT AND EVEREST_DEPENDENCY_ENABLED_JOSEV"
 # linux_libnfc-nci for RFID
 libnfc-nci:
